@@ -751,3 +751,33 @@ Notification triggered only on: Online → Offline
 - [latlong2](https://pub.dev/packages/latlong2) - Distance calculations
 - [flutter_map](https://pub.dev/packages/flutter_map) - Map rendering
 - [GetX](https://pub.dev/packages/get) - Reactive state management
+
+---
+
+## Implementation Notes (fixes applied in code)
+
+The first working implementation deviates from a few points above, on purpose:
+
+1. **Room ID Generation** — switched from a 4-digit random code to a 6-character
+   alphanumeric code, generated with `Random.secure()` and checked against
+   Firestore before use (retried on collision). The original 4-digit scheme had
+   roughly a 1-in-9000 chance of colliding with an existing room.
+   See `lib/controllers/room_controller.dart`.
+
+2. **GPS Tracking** — replaced fixed-interval polling with
+   `Geolocator.getPositionStream` using a `distanceFilter`, so updates fire on
+   movement rather than on a clock. A separate, slower heartbeat timer keeps
+   "last seen" timestamps fresh for stationary users without extra GPS/Firestore
+   cost. See `lib/services/location_service.dart`.
+
+3. **Route Generation** — implemented as one route per member *to the shared
+   destination* (O(n)) rather than a full mesh between every pair of members
+   (O(n²)), matching what the UI actually shows. Routes are only recalculated
+   once a member has moved more than ~40m since their last fetch, not on a fixed
+   timer. Room size is capped at 10 members (`kMaxRoomMembers` in
+   `lib/models/room_model.dart`) to keep this bounded.
+
+4. **Offline Detection** — liveness is evaluated on its own steady 10s timer
+   against each member's last-updated timestamp, rather than reacting to every
+   Firestore snapshot event, to avoid flapping between online/offline on flaky
+   connections. See `MapControllerX._evaluateLiveness()`.

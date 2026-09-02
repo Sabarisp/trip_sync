@@ -20,6 +20,10 @@ A real-time location tracking and group coordination application built with Flut
 - **[Module Description](MODULE_DESCRIPTION.md)** - Comprehensive module breakdown, architecture, and data flow
 - **[Algorithms Used](ALGORITHMS.md)** - Detailed explanation of algorithms including routing, location tracking, and distance calculation
 
+> **New to this repo?** See [SETUP.md](SETUP.md) for the full step-by-step —
+> it covers generating the `android`/`ios` platform folders (not committed
+> here on purpose), connecting Firebase, permissions, and shipping builds.
+
 ## Getting Started
 
 ### Prerequisites
