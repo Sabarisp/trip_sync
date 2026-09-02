@@ -125,7 +125,7 @@ class _MapViewState extends State<MapView> {
                 fm.Polyline(
                   points: entry.value.route.points,
                   strokeWidth: 4,
-                  color: AppColors.colorForUser(entry.key).withOpacity(0.8),
+                  color: AppColors.colorForUser(entry.key).withValues(alpha: 0.8),
                 ),
             ];
 
@@ -168,7 +168,7 @@ class _MapViewState extends State<MapView> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         decoration: BoxDecoration(
-                          color: AppColors.surface.withOpacity(0.92),
+                          color: AppColors.surface.withValues(alpha: 0.92),
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: Row(
@@ -211,9 +211,9 @@ class _MapViewState extends State<MapView> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
-                    color: AppColors.warning.withOpacity(0.15),
+                    color: AppColors.warning.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.warning.withOpacity(0.4)),
+                    border: Border.all(color: AppColors.warning.withValues(alpha: 0.4)),
                   ),
                   child: const Row(
                     children: [
@@ -246,7 +246,7 @@ class _MapViewState extends State<MapView> {
               return Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.surface.withOpacity(0.96),
+                  color: AppColors.surface.withValues(alpha: 0.96),
                   borderRadius: BorderRadius.circular(18),
                 ),
                 child: Row(
@@ -301,7 +301,7 @@ class _RoundIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.surface.withOpacity(0.92),
+      color: AppColors.surface.withValues(alpha: 0.92),
       shape: const CircleBorder(),
       child: InkWell(
         customBorder: const CircleBorder(),
