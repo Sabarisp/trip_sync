@@ -6,6 +6,7 @@ import 'package:trip_sync/services/notification_service.dart';
 import 'package:trip_sync/theme/app_theme.dart';
 import 'package:trip_sync/views/login_view.dart';
 import 'package:trip_sync/views/room_options_view.dart';
+import 'firebase_options.dart';
 
 // NOTE: If you've run `flutterfire configure`, it generates
 // lib/firebase_options.dart with the real project keys. Import it here and
@@ -15,7 +16,7 @@ import 'package:trip_sync/views/room_options_view.dart';
 // which also works fine for Android/iOS.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   await NotificationService().init();
   runApp(const TripSyncApp());
 }
